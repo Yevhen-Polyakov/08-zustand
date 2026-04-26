@@ -19,12 +19,7 @@ const NotePreviewClient = ({id}:Props) => {
         refetchOnMount: false
     })
 
-    const handleBack = () => {
-        const isSure = confirm("Are you sure")
-        if(isSure){
-            router.back()
-        }
-    }
+    
 
 return(
         <Modal>
@@ -32,7 +27,7 @@ return(
                 <div className={css.item}>
                     <div className={css.header}>
                         <h2 className={css.h2}>{note?.title}</h2>
-                        <button type="button" className={css.backBtn} onClick={handleBack}>Back</button>
+                        <button type="button" className={css.backBtn} onClick={() => router.back()}>Back</button>
                     </div>
                     <p>{note?.content}</p>
                     <p>{note?.createdAt}</p>

@@ -52,7 +52,7 @@ const NoteClient = ({tag}:NoteClientProps) => {
 
                 </button>
                 {isOpenModal &&
-                <Modal >
+                <Modal onClose={() => setIsOpenModal(false)}>
                     <NoteForm onClose={() => setIsOpenModal(false)}/>
                 </Modal> }
         </div>

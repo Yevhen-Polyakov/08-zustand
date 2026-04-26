@@ -4,10 +4,9 @@ import { NewNote, Note } from "@/types/note";
 interface FetchNotesResponse {
   notes: Note[];
   totalPages: number;
-  tag: string;
 }
 
-const myKey = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN ?? process.env.NEXT_PUBLIC_NOTEHUB_TOKE ?? "";
+const myKey = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN ?? "";
 
 axios.defaults.baseURL = "https://notehub-public.goit.study/api";
 
