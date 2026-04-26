@@ -2,25 +2,14 @@
 import React, { useCallback, useEffect } from 'react'
 import css from './Modal.module.css'
 import { createPortal } from 'react-dom'
-import { useRouter } from 'next/navigation'
 
 interface ModalProps{
     children: React.ReactNode
-    onClose?: () => void
+    onClose: () => void
 }
 
 const Modal = ({ children, onClose }:ModalProps) => {
-    const router = useRouter()
-    const handleClose = useCallback(
-        () => {
-            if (onClose) {
-                onClose()
-            } else {
-                router.back()
-            }
-        },
-        [onClose, router]
-    )
+    const handleClose = useCallback(() => onClose(), [onClose])
     
     useEffect(()=> {
         function handleKeydown(e: KeyboardEvent) {
