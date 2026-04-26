@@ -9,7 +9,7 @@ import css from "./NotesClient.module.css"
 import Modal from "../../../../components/Modal/Modal"
 import NoteForm from "../../../../components/NoteForm/NoteForm"
 import NoteList from "../../../../components/NoteList/NoteList"
-import ErrorMessage from "../../error"
+import ErrorMessage from "./error"
 
 type NoteClientProps = {
     tag: string;
