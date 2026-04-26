@@ -1,24 +1,28 @@
 "use client"
 import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { useState } from "react"
-import { fetchNotes } from "../../lib/api"
+import { fetchNotes } from "../../../../lib/api"
 import { useDebouncedCallback } from "use-debounce"
-import SearchBox from "../../components/SearchBox/SearchBox"
-import Pagination from "../../components/Pagination/Pagination"
+import SearchBox from "../../../../components/SearchBox/SearchBox"
+import Pagination from "../../../../components/Pagination/Pagination"
 import css from "./NotesClient.module.css"
-import Modal from "../../components/Modal/Modal"
-import NoteForm from "../../components/NoteForm/NoteForm"
-import NoteList from "../../components/NoteList/NoteList"
-import ErrorMessage from "./error"
+import Modal from "../../../../components/Modal/Modal"
+import NoteForm from "../../../../components/NoteForm/NoteForm"
+import NoteList from "../../../../components/NoteList/NoteList"
+import ErrorMessage from "../../error"
 
-const NoteClient = () => {
+type NoteClientProps = {
+    tag: string;
+}
+
+const NoteClient = ({tag}:NoteClientProps) => {
     const [task, setTask] = useState("")
     const [currentPage, setCurrentPage] = useState(1)
     const [isOpenModal, setIsOpenModal] = useState(false)
 
     const {data, error, isError} = useQuery({
-        queryKey:["notes", task, currentPage],
-        queryFn: () => fetchNotes(task, currentPage),  
+        queryKey:["notes", task, currentPage, tag],
+        queryFn: () => fetchNotes(task, currentPage, tag),  
         placeholderData: keepPreviousData,
   })
 
@@ -48,7 +52,7 @@ const NoteClient = () => {
 
                 </button>
                 {isOpenModal &&
-                <Modal onClose={() => setIsOpenModal(false)}>
+                <Modal >
                     <NoteForm onClose={() => setIsOpenModal(false)}/>
                 </Modal> }
         </div>

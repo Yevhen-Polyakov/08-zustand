@@ -2,18 +2,19 @@
 import React, { useEffect } from 'react'
 import css from './Modal.module.css'
 import { createPortal } from 'react-dom'
+import { useRouter } from 'next/navigation'
 
 interface ModalProps{
-    onClose: () => void,
     children: React.ReactNode
 }
 
-const Modal = ({onClose, children}:ModalProps) => {
+const Modal = ({ children}:ModalProps) => {
+    const router = useRouter()
     
     useEffect(()=> {
         function handleKeydown(e: KeyboardEvent) {
             if(e.key === "Escape")
-                onClose()
+              router.back()  
         }
 
         document.addEventListener('keydown', handleKeydown)
@@ -24,7 +25,7 @@ const Modal = ({onClose, children}:ModalProps) => {
             document.body.style.overflow = ""
         }
         
-    }, [onClose])
+    }, [router])
 
     if (typeof document === 'undefined') {
         return null
@@ -35,7 +36,8 @@ const Modal = ({onClose, children}:ModalProps) => {
         className={css.backdrop}
         role="dialog"
         aria-modal="true"
-        onClick={onClose}>
+        onClick={() => router.back()}
+        >
 
             <div className={css.modal} onClick={(e) => e.stopPropagation()}>
                 {children}
