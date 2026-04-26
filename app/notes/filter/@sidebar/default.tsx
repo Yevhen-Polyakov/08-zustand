@@ -9,13 +9,13 @@ const SidebarNotes = async () => {
     
         <ul className={css.menuList}>
             <li className={css.menuItem}>
-                <Link href={`/notes/filters/all`} className={css.menuLink}>
+                <Link href={`/notes/filter/all`} className={css.menuLink}>
                     All notes
                 </Link>
             </li>
             {categories.map((category)=> (
                 <li key={category} className={css.menuItem}>
-                    <Link href={`/notes/filters/${category}`} className={css.menuLink}>
+                    <Link href={`/notes/filter/${category}`} className={css.menuLink}>
                         {category}
                     </Link>
                 </li>
