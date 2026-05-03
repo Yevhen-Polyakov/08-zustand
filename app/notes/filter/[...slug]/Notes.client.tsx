@@ -6,13 +6,10 @@ import { useDebouncedCallback } from "use-debounce"
 import SearchBox from "../../../../components/SearchBox/SearchBox"
 import Pagination from "../../../../components/Pagination/Pagination"
 import css from "./NotesClient.module.css"
-import Modal from "../../../../components/Modal/Modal"
-import NoteForm from "../../../../components/NoteForm/NoteForm"
 import NoteList from "../../../../components/NoteList/NoteList"
 import ErrorMessage from "./error"
-import { categories } from "../@sidebar/default"
 import Link from "next/link"
-import type { NoteTag } from "@/types/note"
+
 
 type NoteClientProps = {
     tag: string;
@@ -21,7 +18,7 @@ type NoteClientProps = {
 const NoteClient = ({tag}:NoteClientProps) => {
     const [task, setTask] = useState("")
     const [currentPage, setCurrentPage] = useState(1)
-    const [isOpenModal, setIsOpenModal] = useState(false)
+   
 
     const {data, error, isError} = useQuery({
         queryKey:["notes", task, currentPage, tag],
@@ -53,11 +50,8 @@ const NoteClient = ({tag}:NoteClientProps) => {
                     href="/notes/action/create"
                     >Create note +
                 </Link>
+                         
                 
-                {isOpenModal &&
-                <Modal onClose={() => setIsOpenModal(false)}>
-                    <NoteForm categories={categories as NoteTag[]} />
-                </Modal> }
         </div>
 
         <div>

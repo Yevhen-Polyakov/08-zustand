@@ -13,12 +13,12 @@ export async function generateMetadata({params}: NoteDetailsProps):Promise<Metad
     const { id } = await params
     const note = await fetchNoteById(id)
     return {
-        title:`Note${note.title}`,
+        title:`Note: ${note.title}`,
         description: note.content.slice(0,30),
         openGraph:{
             title:`Note${note.title}`,
             description:note.content.slice(0, 100),
-            url:process.env.NEXT_PUBLIC_APP_URL ?? `http://localhost:3000/${note.id}`,
+            url:process.env.NEXT_PUBLIC_APP_URL ?? `https://08-zustand-gules-one.vercel.app/notes/${note.id}`,
             images:[{
                 url:"https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
                 width:1200,
