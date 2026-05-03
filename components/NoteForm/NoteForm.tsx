@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { createNote } from '@/lib/api'
 import { NewNote, NoteTag } from '@/types/note'
 import { useRouter } from 'next/navigation'
-import { useNoteDraftStore } from '@/lib/store/notes'
+import { useNoteDraftStore } from '@/lib/store/noteStore'
 
 const OrderFormSchema = Yup.object().shape({
     title: Yup.string().min(3).max(50).required("Title is required"),
