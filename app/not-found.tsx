@@ -1,4 +1,21 @@
+import { Metadata } from "next";
 import css from "./not-found.module.css";
+
+export const metadata:Metadata = {
+  title:"not-found",
+  description:"The page you are looking for does not exist on NoteHub.",
+  openGraph:{
+    title:"not-found",
+    description:"The page you are looking for does not exist on NoteHub.",
+    images:[{
+      url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+      width: 1200,
+      height: 630,
+      alt:"not-found",
+    }],
+    type:"article",
+  }
+}
 
 const NotFound = () => {
   return (

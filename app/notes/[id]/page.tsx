@@ -1,11 +1,32 @@
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query"
 import { fetchNoteById } from "@/lib/api"
 import NoteDetailClient from "./NoteDetails.client"
+import { Metadata } from "next"
 
 interface NoteDetailsProps {
     params: Promise<{
         id: string
     }>
+}
+
+export async function generateMetadata({params}: NoteDetailsProps):Promise<Metadata>{
+    const { id } = await params
+    const note = await fetchNoteById(id)
+    return {
+        title:`Note${note.title}`,
+        description: note.content.slice(0,30),
+        openGraph:{
+            title:`Note${note.title}`,
+            description:note.content.slice(0, 100),
+            url:process.env.NEXT_PUBLIC_APP_URL ?? `http://localhost:3000/${note.id}`,
+            images:[{
+                url:"https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+                width:1200,
+                height:600,
+                alt: note.title,
+            }]
+        }
+    }
 }
 
 const NoteDetails = async ({ params }: NoteDetailsProps) => {

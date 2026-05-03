@@ -10,6 +10,9 @@ import Modal from "../../../../components/Modal/Modal"
 import NoteForm from "../../../../components/NoteForm/NoteForm"
 import NoteList from "../../../../components/NoteList/NoteList"
 import ErrorMessage from "./error"
+import { categories } from "../@sidebar/default"
+import Link from "next/link"
+import type { NoteTag } from "@/types/note"
 
 type NoteClientProps = {
     tag: string;
@@ -45,15 +48,15 @@ const NoteClient = ({tag}:NoteClientProps) => {
                 currentPage={currentPage}
                 onPageChange={setCurrentPage}/>)}
             
-                <button 
+                <Link 
                     className={css.button}
-                    onClick={() => setIsOpenModal(true)}
-                >Create note +
-
-                </button>
+                    href="/notes/action/create"
+                    >Create note +
+                </Link>
+                
                 {isOpenModal &&
                 <Modal onClose={() => setIsOpenModal(false)}>
-                    <NoteForm onClose={() => setIsOpenModal(false)}/>
+                    <NoteForm categories={categories as NoteTag[]} />
                 </Modal> }
         </div>
 
