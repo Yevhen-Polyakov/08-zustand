@@ -1,7 +1,7 @@
 import { dehydrate, HydrationBoundary, QueryClient} from "@tanstack/react-query"
 import css from "./NotesClient.module.css"
 import { fetchNotes } from "@/lib/api"
-import NoteClient from "./Notes.client"
+import NotesClient from "./Notes.client"
 import { Metadata } from "next"
 
 type Props = {
@@ -38,7 +38,7 @@ const Notes = async ({params}:Props) => {
 
     await queryClient.prefetchQuery({
         queryKey: ["notes", "", tag],
-        queryFn: () =>  fetchNotes("", 1, tag),
+        queryFn: () =>  fetchNotes("", tag, 1),
     })
 
 
@@ -46,7 +46,7 @@ const Notes = async ({params}:Props) => {
         
          <div className={css.app}>
             <HydrationBoundary state={dehydrate(queryClient)}>
-                <NoteClient tag={tag}/>
+                <NotesClient tag={tag}/>
             </HydrationBoundary>
       
         </div>

@@ -7,22 +7,22 @@ import SearchBox from "../../../../components/SearchBox/SearchBox"
 import Pagination from "../../../../components/Pagination/Pagination"
 import css from "./NotesClient.module.css"
 import NoteList from "../../../../components/NoteList/NoteList"
-import ErrorMessage from "./error"
+import ErrorMessage from "@/app/notes/filter/[...slug]/error"
 import Link from "next/link"
 
 
-type NoteClientProps = {
+type NotesClientProps = {
     tag: string;
 }
 
-const NoteClient = ({tag}:NoteClientProps) => {
-    const [task, setTask] = useState("")
+const NotesClient = ({tag}:NotesClientProps) => {
+    const [query, setQuery] = useState("")
     const [currentPage, setCurrentPage] = useState(1)
    
 
     const {data, error, isError} = useQuery({
-        queryKey:["notes", task, currentPage, tag],
-        queryFn: () => fetchNotes(task, currentPage, tag),  
+        queryKey:["notes", query, currentPage, tag],
+        queryFn: () => fetchNotes(query, tag, currentPage),
         placeholderData: keepPreviousData,
   })
 
@@ -31,7 +31,7 @@ const NoteClient = ({tag}:NoteClientProps) => {
 
   const searchQuery = useDebouncedCallback(
         (value:string) => {
-            setTask(value)
+            setQuery(value)
             setCurrentPage(1)
         },300
       )
@@ -63,4 +63,4 @@ const NoteClient = ({tag}:NoteClientProps) => {
     )
 }
 
-export default NoteClient
+export default NotesClient
